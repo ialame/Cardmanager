@@ -1,0 +1,54 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- Servers section: credentials for repositories -->
+    <servers>
+        <server>
+            <id>pca-private</id>
+            <username>g.calloch</username>
+            <password>dOiP6u35OA3leDIJvScpiTrK2nuJwFNYp/uI3S8wsfx4JIvkGtZxG0Nq9CqzkBpu</password>
+        </server>
+        <server>
+            <id>pca-releases</id>
+            <username>g.calloch</username>
+            <password>dOiP6u35OA3leDIJvScpiTrK2nuJwFNYp/uI3S8wsfx4JIvkGtZxG0Nq9CqzkBpu</password>
+        </server>
+    </servers>
+
+    <!-- Profiles section: define repositories -->
+    <profiles>
+        <profile>
+            <id>pcagrade-profile</id>
+            <repositories>
+                <repository>
+                    <id>pca-private</id>
+                    <url>https://maven.pcagrade.com/private/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>pca-releases</id>
+                    <url>https://maven.pcagrade.com/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+
+    <!-- Activate the profile by default -->
+    <activeProfiles>
+        <activeProfile>pcagrade-profile</activeProfile>
+    </activeProfiles>
+
+</settings>

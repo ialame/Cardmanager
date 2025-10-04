@@ -1,0 +1,61 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.DS_Store
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+dist
+node_modules
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+/dist/
+/bin/
+
+### Frontent ###
+dist
+node_modules
+swagger-codegen-cli.jar
+
+application-test-local.properties
+/logs/
+/pom.xml.versionsBackup
+pca.sql
+prompt.txt
+readme
+cache/pages/
+pca.sql
+*/local-maven-repo/
+db-data
+2025-07-04_00-00-01.sql
+docker-compose.yml.old2
+docker-compose.yml.old
+Makefile
+quick-start.sh
+nginx-images.conf
+image-viewer.html
+
