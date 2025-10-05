@@ -12,9 +12,9 @@ import {isString} from "lodash";
 import {pokemonSerieService} from "@components/cards/pokemon/serie/service";
 
 interface Props {
-  serie?: PokemonSerieDTO;// | string;
+  serie?: PokemonSerieDTO;
   langue: LocalizationCode;
-  lang: PokemonSerieTranslationDTO | undefined;
+  lang?: PokemonSerieTranslationDTO;  // Rendre optionnel avec ?
 }
 
 const props = defineProps<Props>();

@@ -11,7 +11,6 @@ import {PokemonSerieDTO} from "@/types";
 import {computed, DefineComponent} from "vue";
 import {AdvancedFormSelect} from "@components/form/advanced";
 import FormSelect from "@components/form/FormSelect.vue";
-import {computedAsync} from "@vueuse/core";
 import {isEmpty, isNil} from "lodash";
 import PokemonSerieLabel from "@components/cards/pokemon/serie/PokemonSerieLabel.vue";
 import {pokemonSerieService} from "@components/cards/pokemon/serie/service";
@@ -30,7 +29,8 @@ const props = withDefaults(defineProps<Props>(), {
     hasAllOption: false,
 });
 
-const series = computedAsync<PokemonSerieDTO[]>(() => !isEmpty(props.values) ? props.values : pokemonSerieService.all.value, []);
+const series = computed<PokemonSerieDTO[]>(() => !isEmpty(props.values) ? props.values : pokemonSerieService.all.value);
+
 const component = computed<DefineComponent<{}, {}, any>>(() => {
     if (props.advanced) {
         return AdvancedFormSelect;

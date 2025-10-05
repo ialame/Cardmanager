@@ -1,8 +1,14 @@
 <template>
     <FormRow v-if="!isParent && filteredSets.length > 0">
         <div class="d-flex flex-row">
-            <PokemonSetSelect path="parent" label="Extension mere" :values="filteredSets" advanced />
-            <div v-if="!readOnly" class="ms-2 d-flex flex-column">
+            <PokemonSetSelect
+              path="parent"
+              label="Extension mere"
+              :values="filteredSets"
+              :langue="langue"
+              advanced
+          />
+          <div v-if="!readOnly" class="ms-2 d-flex flex-column">
                 <FormButton color="danger" class="form-btn" @click="remove"><Icon name="trash" /></FormButton>
             </div>
         </div>
@@ -18,13 +24,16 @@ import FormButton from "@components/form/FormButton.vue";
 import Icon from "@components/Icon.vue";
 import {useAdvancedFormInput} from "@components/form/advanced";
 import {PokemonSetDTO} from "@/types";
+import {LocalizationCode} from "@/localization";
 
 interface Props {
     isParent?: boolean;
+    langue?: LocalizationCode;
 }
 
 withDefaults(defineProps<Props>(), {
     isParent: false,
+    langue: () => 'us',
 });
 
 const {value, readOnly, context} = useAdvancedFormInput<EditedPokemonSet, PokemonSetDTO>("parent");

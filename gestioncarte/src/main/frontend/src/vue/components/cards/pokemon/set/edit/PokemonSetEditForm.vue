@@ -2,7 +2,7 @@
     <AdvancedForm v-model="value" :small="true" :rules="isParent ? rulesParent : rules">
         <div class="container">
             <FormRow v-if="!isParent">
-                <PokemonSerieSelect path="serie" :values="filteredSeries" advanced />
+              <PokemonSerieSelect path="serie" :values="filteredSeries" :langue="localizations[0] || 'us'" advanced />
             </FormRow>
             <FormRow class="form-group align-items-end">
                 <AdvancedFormInput label="Code extension" path="shortName" />
@@ -11,7 +11,7 @@
                     <AdvancedFormCheckbox label="Promo" path="promo" />
                 </Column>
             </FormRow>
-            <PokemonSetEditFormParentSetSelect :isParent="isParent" />
+            <PokemonSetEditFormParentSetSelect :isParent="isParent" :langue="localizations[0] || 'us'" />
             <SetIconSelect />
             <PokemonSetEditFormTranslations :localizations="localizations" @update:localizations="l => $emit('update:localizations', l)" :isParent="isParent" />
             <PokemonSetEditFormExtensionsBulbapedia v-if="!isParent" />
@@ -64,7 +64,7 @@ import {
     AdvancedFormSaveButton
 } from "@components/form/advanced";
 import {ExpansionBulbapediaDTO, ExtractedImageDTO, PokemonSetDTO, PtcgoSetDTO} from "@/types";
-import {computed} from "vue";
+import {computed, watch} from "vue";
 import FormRow from "@components/form/FormRow.vue";
 import {PokemonComposables} from "@/vue/composables/pokemon/PokemonComposables";
 import {cloneDeep, isNil, isString} from "lodash";
@@ -118,7 +118,18 @@ const emit = defineEmits<Emits>();
 const series = pokemonSerieService.all;
 const sets = PokemonComposables.pokemonSetService.all;
 
-const filteredSeries = computedAsync(() => pokemonSerieService.find(s => props.localizations.some(l => s.translations[l])), []);
+const filteredSeries = computed(() => {
+  console.log('🔍 Computing filteredSeries');
+  console.log('  props.localizations:', props.localizations);
+  console.log('  series.value.length:', series.value.length);
+  const result = series.value.filter(s => props.localizations.some(l => s.translations[l]));
+  console.log('  filtered result.length:', result.length);
+  return result;
+});
+
+watch(() => props.localizations, (newVal) => {
+  console.log('📝 props.localizations changed to:', newVal);
+}, { immediate: true, deep: true });
 
 const cleanPkmncardsComSetPath = (pkmncardsComSetPath?: string) => {
     if (isNil(pkmncardsComSetPath)) {

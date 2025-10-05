@@ -1,5 +1,7 @@
 <template>
-    <PokemonSetEditForm v-model="editSetForm.set"
+    <PokemonSetEditForm
+                        :key="(route.query.localization as string) || 'default'"
+                        v-model="editSetForm.set"
                         v-model:icon="icon"
                         v-model:expansionsBulbapedia="editSetForm.expansionsBulbapedia"
                         v-model:ptcgoSets="editSetForm.ptcgoSets"
@@ -9,7 +11,8 @@
                         v-model:japaneseOfficialSitePgs="editSetForm.japaneseOfficialSitePgs"
                         v-model:pokecardexCode="editSetForm.pokecardexCode"
                         v-model:localizations="localizations"
-                        @save="save">
+                        @save="save"
+                        >
         <template #save-buttons>
             <AdvancedFormSaveButton v-if="editSetForm.set.id === ''" color="secondary" @save="saveAndNew" :shortcut="false" class="mt-4 mb-4 me-2">Enregistrer et rester</AdvancedFormSaveButton>
         </template>
