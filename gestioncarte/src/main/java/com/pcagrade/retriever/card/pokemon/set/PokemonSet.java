@@ -8,16 +8,7 @@ import com.pcagrade.retriever.card.pokemon.source.pkmncards.path.PkmncardsComSet
 import com.pcagrade.retriever.card.pokemon.source.ptcgo.PtcgoSet;
 import com.pcagrade.retriever.card.pokemon.source.wiki.url.WikiUrl;
 import com.pcagrade.retriever.card.set.CardSet;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.MapKey;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -126,5 +117,12 @@ public class PokemonSet extends CardSet {
 
 	public void setPrintedTotal(String printedTotal) {
 		this.printedTotal = printedTotal;
+	}
+
+	@PrePersist
+	protected void onPrePersist() {
+		if (this.getDiscriminator() == null) {
+			this.setDiscriminator("pok");
+		}
 	}
 }

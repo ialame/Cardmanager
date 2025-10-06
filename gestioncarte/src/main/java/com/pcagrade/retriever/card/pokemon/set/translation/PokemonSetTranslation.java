@@ -2,11 +2,7 @@ package com.pcagrade.retriever.card.pokemon.set.translation;
 
 import com.pcagrade.retriever.card.set.CardSetTranslation;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "pokemon_set_translation")
@@ -14,7 +10,12 @@ import jakarta.persistence.Table;
 @DiscriminatorValue("pok")
 public class PokemonSetTranslation extends CardSetTranslation {
 
-
+	@PrePersist
+	protected void onPrePersist() {
+		if (this.getDiscriminator() == null) {
+			this.setDiscriminator("pok");
+		}
+	}
 
 	@Column(name = "original_name")
 	private String originalName = "";

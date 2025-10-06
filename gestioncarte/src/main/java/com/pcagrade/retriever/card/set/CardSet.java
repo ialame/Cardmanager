@@ -7,27 +7,12 @@ import com.pcagrade.retriever.card.set.extraction.status.CardSetExtractionStatus
 import com.pcagrade.mason.localization.Localization;
 import com.pcagrade.retriever.serie.Serie;
 import com.pcagrade.retriever.voucher.Voucher;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import jakarta.persistence.Cacheable;
+import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapKey;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
+
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -40,6 +25,19 @@ import java.util.Map;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CardSet extends AbstractUlidEntity {
+	@Column(name = "discriminator")
+	protected String discriminator;  // <-- Ajoutez ce champ
+
+	// Ajoutez ces méthodes
+	public String getDiscriminator() {
+		return discriminator;
+	}
+
+	public void setDiscriminator(String discriminator) {
+		this.discriminator = discriminator;
+	}
+
+
 
 	@OneToMany(mappedBy = "translatable", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@MapKey(name = "localization")

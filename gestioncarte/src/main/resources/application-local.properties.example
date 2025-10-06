@@ -1,0 +1,9 @@
+
+
+#spring.datasource.url=jdbc:mariadb://${retriever.database.host}/${retriever.database}?useUnicode=yes&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&noAccessToProcedureBodies=true
+#spring.datasource.username=${retriever.database.username}
+#spring.datasource.password=${retriever.database.password}
+#
+#painter.image.storage-path=${painter.image.storage.path}
+#painter.image.legacy-storage-path=${painter.image.legacy.storage.path}
+

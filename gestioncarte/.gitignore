@@ -42,6 +42,7 @@ node_modules
 swagger-codegen-cli.jar
 
 application-test-local.properties
+application-local.properties
 /logs/
 /pom.xml.versionsBackup
 docker-compose.yml

@@ -1,17 +1,12 @@
 package com.pcagrade.retriever.card.set;
 
 import com.pcagrade.retriever.localization.translation.AbstractTranslationEntity;
+import jakarta.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import jakarta.persistence.Cacheable;
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import org.hibernate.annotations.DiscriminatorOptions;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,6 +17,18 @@ import java.time.LocalDateTime;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CardSetTranslation extends AbstractTranslationEntity<CardSet> {
+
+	@Column(name = "discriminator")
+	protected String discriminator;  // <-- Ajoutez ce champ
+
+	// Ajoutez ces méthodes
+	public String getDiscriminator() {
+		return discriminator;
+	}
+
+	public void setDiscriminator(String discriminator) {
+		this.discriminator = discriminator;
+	}
 
 	@Column
 	private boolean available;
