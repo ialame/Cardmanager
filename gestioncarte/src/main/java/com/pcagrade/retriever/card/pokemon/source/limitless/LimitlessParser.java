@@ -42,7 +42,7 @@ public class LimitlessParser {
     private static final String LIMITLESS_SETS_URL = "https://limitlesstcg.com/cards";
     // Cache des sets (nom -> [code, nombre de cartes])
     public Map<String, String> setNameToCode = new HashMap<>();
-    public Map<String, String> setNameToSetId = new HashMap<>();
+    //public Map<String, String> setNameToSetId = new HashMap<>();
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final RestTemplate restTemplate = new RestTemplate();
@@ -55,8 +55,8 @@ public class LimitlessParser {
             setNameToCode.put(sets.get(k), k);
         }
 
-        Map<String, String> setIdMap = fetchSetIdsFromPokemonTcgApi();
-        setNameToSetId.putAll(setIdMap);
+        //Map<String, String> setIdMap = fetchSetIdsFromPokemonTcgApi();
+        //setNameToSetId.putAll(setIdMap);
 
     }
 

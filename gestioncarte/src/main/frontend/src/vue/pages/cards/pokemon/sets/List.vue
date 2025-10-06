@@ -19,13 +19,16 @@
                 </Column>
                 <Column>
                     <label class="form-label">Filtrer par Série</label>
-                    <PokemonSerieSelect v-model="serieFilter" :values="serieList" hasAllOption />
+                    <PokemonSerieSelect v-model="serieFilter" :langue="localizationFilter === 'all' ? 'us' : localizationFilter" :values="serieList" hasAllOption />
                 </Column>
             </FormRow>
             <hr>
             <Collapse v-for="(setList, serieId) in groupedSets" :key="serieId" :open="!!serieFilter">
                 <template #label>
-                    <PokemonSerieLabel :serie="serieId" />
+                  <PokemonSerieLabel
+                      :serie="getSerieById(serieId)"
+                      :langue="localizationFilter === 'all' ? 'us' : localizationFilter"
+                  />
                 </template>
                 <table class="table table-striped mt-4">
                     <thead>
@@ -37,9 +40,9 @@
                     </thead>
                     <tbody>
                         <tr v-for="set in setList" :key="set.id">
-                            <td>
-                                <PokemonSetLabel :set="set" />
-                            </td>
+                          <td>
+                            <PokemonSetLabel :set="set" :langue="localizationFilter === 'all' ? 'us' : localizationFilter" />
+                          </td>
                             <td>
                                 <Flag v-for="localization in set.translations" :key="localization" :lang="localization.localization" class="me-1" />
                             </td>
@@ -100,4 +103,8 @@ const groupedSets = computed(() => chain(sets.value)
     .filter(filterSerie)
     .groupBy(set => set.serieId)
     .value());
+
+const getSerieById = (serieId: string) => {
+  return pokemonSerieService.all.value.find(s => s.id === serieId);
+};
 </script>

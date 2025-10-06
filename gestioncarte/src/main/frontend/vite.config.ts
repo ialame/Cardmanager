@@ -68,6 +68,7 @@ export default defineConfig(({ mode }) => {
             }
         },
         server: {
+            cors: true,
             port: 3000,
             strictPort: true,
             watch: {
