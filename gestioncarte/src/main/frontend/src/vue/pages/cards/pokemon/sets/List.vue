@@ -92,7 +92,7 @@ const ready = computed(() => !isEmpty(sets.value));
 
 const promoFilter = ref<PromoFilterValue>("all");
 const filterPromo = (set: PokemonSetDTO) => promoFilter.value === 'all' || set.promo === (promoFilter.value === "true");
-const localizationFilter = ref<LocalizationFilterValue>('all');
+const localizationFilter = ref<LocalizationFilterValue>('us');
 const filterLocalization = (set: PokemonSetDTO) => localizationFilter.value === 'all' || !!set.translations[localizationFilter.value]?.available;
 const serieFilter = ref<PokemonSerieDTO>();
 const serieList = computedAsync<PokemonSerieDTO[]>(async () => localizationFilter.value === 'all' ? pokemonSerieService.all.value : await pokemonSerieService.find(serie => !!serie.translations[localizationFilter.value as LocalizationCode]), []);

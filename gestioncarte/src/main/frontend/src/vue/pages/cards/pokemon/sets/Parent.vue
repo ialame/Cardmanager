@@ -12,7 +12,7 @@
                 </Column>
                 <Column size="sm" class="form-group">
                     <label class="form-label">Serie</label>
-                    <PokemonSerieSelect v-model="serie" :values="displaySeries" />
+                  <PokemonSerieSelect v-model="serie" :values="displaySeries" :langue="localization" />
                 </Column>
             </FormRow>
             <ListInput v-if="serie" label="Extensions" v-model="sets" v-slot="{item: item, first: first}" :useSeparators="true">

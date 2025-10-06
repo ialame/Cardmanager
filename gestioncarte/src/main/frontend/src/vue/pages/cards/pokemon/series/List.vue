@@ -20,7 +20,7 @@
                     <tbody>
                         <tr v-for="serie in filteredSeries" :key="serie.id">
                             <td>
-                                <PokemonSerieLabel :serie="serie.id"/>
+                              <PokemonSerieLabel :serie="serie" :langue="localizationFilter === 'all' ? 'us' : localizationFilter" />
                             </td>
                             <td>
                                 <a title="Modifier" :href="`/cards/pokemon/series/${serie.id}`" target="_blank" rel="noopener" class="btn btn-link me-2 p-0 no-focus">
@@ -57,7 +57,7 @@ import Column from "@components/grid/Column.vue";
 
 type LocalizationFilterValue = LocalizationCode | 'all';
 const series = RestComposables.useRestComposable(() => rest.get(`/api/cards/pokemon/series`), undefined) as Ref<PokemonSerieDTO[] | undefined>;
-const localizationFilter = ref<LocalizationFilterValue>('all');
+const localizationFilter = ref<LocalizationFilterValue>('us');
 const filterLocalization = (series : PokemonSerieDTO ) => localizationFilter.value === 'all' || !!series.translations[localizationFilter.value];
 const filteredSeries = computed(() => chain(series.value)
     .filter(filterLocalization)
